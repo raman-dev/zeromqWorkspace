@@ -3,7 +3,7 @@ import zmq
 def main():
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
-    socket.connect("tcp://localhost:5555")
+    socket.connect("tcp://localhost:42069")
 
     print("Connected to server at tcp://localhost:5555")
     print("Type messages to send. Type 'exit' to quit.\n")
@@ -12,6 +12,7 @@ def main():
         while True:
             message = input("> ")
             # Send message to server
+            # cannot send again unless reply is received
             socket.send_string(message)
 
             if message.lower() in ("exit", "quit"):
